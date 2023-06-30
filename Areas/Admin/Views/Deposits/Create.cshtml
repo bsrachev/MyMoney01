@@ -1,0 +1,87 @@
+﻿@using MyMoney.Data.Models.Enums
+@model MyMoney.Data.Models.Deposit
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Deposit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MinimalAmount" class="control-label"></label>
+                <input asp-for="MinimalAmount" class="form-control" />
+                <span asp-validation-for="MinimalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Currency" class="control-label"></label>
+                <select asp-for="Currency" class="form-control">
+                    @foreach (var currency in Enum.GetValues(typeof(Currency)))
+                    {
+                        <option value="@((Currency)currency)" selected="@(Model.Currency == (Currency)currency)">@currency</option>
+                    }
+                </select>
+                <span asp-validation-for="Currency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Term" class="control-label"></label>
+                <input asp-for="Term" class="form-control" />
+                <span asp-validation-for="Term" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnnualInterestRate" class="control-label"></label>
+                <input asp-for="AnnualInterestRate" class="form-control" />
+                <span asp-validation-for="AnnualInterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientType" class="control-label"></label>
+                <select asp-for="ClientType" class="form-control">
+                    @foreach (var clientType in Enum.GetValues(typeof(ClientType)))
+                    {
+                        <option value="@((ClientType)clientType)" selected="@(Model.ClientType == (ClientType)clientType)">@clientType</option>
+                    }
+                </select>
+                <span asp-validation-for="ClientType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InterestPayment" class="control-label"></label>
+                <select asp-for="InterestPayment" class="form-control">
+                    @foreach (var interestPayment in Enum.GetValues(typeof(InterestPayment)))
+                    {
+                        <option value="@((InterestPayment)interestPayment)" selected="@(Model.InterestPayment == (InterestPayment)interestPayment)">@interestPayment</option>
+                    }
+                </select>
+                <span asp-validation-for="InterestPayment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsInterestFixed" /> @Html.DisplayNameFor(model => model.IsInterestFixed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OverdraftFacility" /> @Html.DisplayNameFor(model => model.OverdraftFacility)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CreditFacility" /> @Html.DisplayNameFor(model => model.CreditFacility)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

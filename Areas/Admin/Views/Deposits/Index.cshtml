@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MyMoney.Data.Models.Deposit>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Term)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnualInterestRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestPayment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsInterestFixed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverdraftFacility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditFacility)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualInterestRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterestPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsInterestFixed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverdraftFacility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditFacility)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

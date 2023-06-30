@@ -1,0 +1,132 @@
+﻿@using MyMoney.Data.Models.Enums
+@using MyMoney.Models.Deposits
+@model AllDepositsQueryModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form method="get" class="mb-3">
+    <div class="row">
+        @*<div class="col-md-5">
+        <div class="input-group">
+        <label asp-for="SearchTerm" class="input-group-text">Search</label>
+        <input asp-for="SearchTerm" class="form-control" placeholder="">
+        </div>
+        </div>*@
+        <div class="col-md-3">
+            <div class="input-group">
+                <label asp-for="CurrencySearch" class="input-group-text">Category</label>
+                <select asp-for="CurrencySearch" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var currency in Enum.GetValues(typeof(Currency)))
+                    {
+                        <option value="@((Currency)currency)" selected="@(Model.CurrencySearch == (Currency)currency)">@currency</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <label asp-for="Sorting" class="input-group-text">Sort By</label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0" selected>Name</option>
+                    <option value="1">Last Added</option>
+                    <option value="2">First Added</option>
+                    <option value="3">Price (Ascending)</option>
+                    <option value="4">Price (Descending)</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Minimal Amount
+            </th>
+            <th>
+                Currency
+            </th>
+            <th>
+                Term
+            </th>
+            <th>
+                Annual InterestRate
+            </th>
+            <th>
+                Client Type
+            </th>
+            <th>
+                Interest Payment
+            </th>
+            <th>
+                IsInterest Fixed
+            </th>
+            <th>
+                Overdraft Facility
+            </th>
+            <th>
+                Credit Facility
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Deposits)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinimalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Term)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnnualInterestRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterestPayment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsInterestFixed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverdraftFacility)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditFacility)
+                </td>
+                <td>
+                    <div class="button-holder">
+                        <a href="/Deposits?orderId=@Model&depositId=@item.Id" class="btn btn-info">Calculate</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.SelectedDepositId != null)
+{
+    <div class="col-md-5">
+        <div class="input-group">
+            <label class="input-group-text">Total Amount:</label>
+            <span class="form-control" placeholder="">@Html.DisplayFor(modelItem => Model.CalculatedAmount)</span>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4" style="font-family: Georgia, serif">My Money</h1>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <p style="font-family: Georgia, serif">Добре дошли, @(this.User.Identity.Name)! Ще разгледате ли нашите опции за <a href="@(this.User.IsAdmin() ? "Admin/Deposits" : "/Deposits")>депозити</a>?</p>
+    }
+    else
+    {
+        <p style="font-family: Georgia, serif">Влезте във вашия профил от <a href="/Identity/Account/Login">тук</a>.</p>
+    }
+
+    <section class="section-one">
+        <div class="container">
+            <div class="sec-one-left">
+                <!-- image here -->
+                <div>
+                    <h3>Ипотечни кредити</h3>
+                    <p>Ипотечният кредит е кредит, който е обезпечен (гарантиран) с недвижим имот. </p>
+                    <a href="#" class="btn">view all</a>
+                </div>
+            </div>
+
+            <div class="sec-one-right">
+                <div class="work-content">
+                    <h3>Бизнес и потребителски кредити </h3>
+                    <p>Искате да стартирате или да развиете своя бизнес? Правилния кредит за вас е Бизнес кредитът. Имате неочакван разход? Решението е Потребителски кредит.</p>
+                    <a href="#" class="btn">view all</a>
+                </div>
+                <div class="work-imgs">
+                    <div class="work-img-1">
+                        <!--image here-->
+                    </div>
+                    <div class="work-img-2">
+                        <!-- image here -->
+                    </div>
+                </div>
+                <h3>"Money is a terrible master but an excellent servant."</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-two">
+        <div class="container">
+            <h2>Искате да знаете повече за парите? Последвайте ни в Инстаграм!</h2>
+            <span>MYMONEY</span>
+            <div class="insta-imgs">
+                <div>
+                    <img src="images/insta1.jpg">
+                    <div class="icon-overlay flex">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/insta2.jpg">
+                    <div class="icon-overlay flex">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/insta3.jpg">
+                    <div class="icon-overlay flex">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/insta4.jpg">
+                    <div class="icon-overlay flex">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
