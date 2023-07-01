@@ -2,10 +2,9 @@
 {
     public enum DepositsSorting
     {
-        Model = 0,
-        LastAdded = 1,
-        FirstAdded = 2,
-        TheMostExpensive = 3,
-        TheCheapest = 4
+        LowestInterestRate = 0,
+        HighestInterestRate = 1,
+        TermAscending = 2,
+        TermDescending = 3
     }
 }
