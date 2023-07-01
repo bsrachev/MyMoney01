@@ -67,13 +67,31 @@ h1, h2, h3, h4, h5, h6, p{
     color: var(--lightGreen)!important;     /****home/gallery/contact/color when on them****/
 }
 
+.btn-sm {
+    background: var(--darkGreen);
+    border: none;
+    display: block;
+    text-align: center;
+    color: var(--darkGreen);
+    text-transform: uppercase;
+    background: transparent;
+    border: 2px solid var(--darkGreen);
+    border-radius: 25px;
+    transition: var(--transition);
+}
+
+.btn-sm:hover {
+    background: var(--darkGreen);
+    color: #fff;
+}
+
 /**************** end of Utility Classes *******************/
 
 /********************** Header styling *********************/
 
 .header {
     min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("~/images/header1.jpg") center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/header1.jpg") center/cover no-repeat;
     color: #fff;
 }
 .top-nav a{
@@ -228,7 +246,7 @@ blockquote span{
 }
 .sec-one-left{
     height: 100vh;
-    background: url("images/ipocredit4.jpg") center/cover no-repeat;
+    background: url("/images/ipocredit4.jpg") center/cover no-repeat;
     box-shadow: 0px 0px 14px -1px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 14px -1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 14px -1px rgba(0, 0, 0, 0.75);
@@ -268,12 +286,12 @@ blockquote span{
     grid-column-gap: 20px;
 }
 .work-img-1{
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url("images/businesscredit.jpg") center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url("/images/businesscredit.jpg") center/cover no-repeat;
     height: 400px;
     transition: var(--transition);
 }
 .work-img-2{
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url("images/consumercredit.jpg") center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url("/images/consumercredit.jpg") center/cover no-repeat;
     height: 400px;
     transition: var(--transition);
 }
@@ -694,5 +712,9 @@ blockquote span{
     .work-imgs{
         grid-template-columns: 1fr;
         grid-row-gap: 20px;
+    }
+    .td-center {
+        text-align: center !important;
+        vertical-align: middle !important;
     }
 }

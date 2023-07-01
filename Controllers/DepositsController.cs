@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyMoney.Data;
 using MyMoney.Data.Models;
@@ -22,7 +17,7 @@ namespace MyMoney.Controllers
         }
 
         // GET: Deposits
-        public IActionResult Index([FromQuery] AllDepositsQueryModel querySearch, int? depositId)
+        public IActionResult Index([FromQuery] AllDepositsQueryModel querySearch, int? depositId, decimal desiredAmount)
         {
             var queryResult = this._context.Deposits.AsQueryable();
 
@@ -46,18 +41,12 @@ namespace MyMoney.Controllers
                     Term = d.Term
                 }); //.ToList();
 
-            if (depositId != null)
+            if (depositId != null && DepositExists(depositId.Value))
             {
                 querySearch.CalculatedAmount = CalculateAmountAtEndOfTerm(this._context.Deposits
-                .FirstOrDefault(m => m.Id == depositId), 10000);
+                .FirstOrDefault(m => m.Id == depositId), 1000);
                 querySearch.SelectedDepositId = depositId;
             }
-
-            //var categories = this.products.AllCategories();
-
-            //query.TotalProducts = queryResult.TotalProducts;
-            //query.Products = queryResult.Products;
-            //query.Categories = categories;
 
             return View(querySearch);
         }
@@ -82,51 +71,38 @@ namespace MyMoney.Controllers
 
         private bool DepositExists(int id)
         {
-          return (_context.Deposits?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Deposits?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public static decimal CalculateAmountAtEndOfTerm(Deposit deposit, decimal amount)
+        private static decimal CalculateAmountAtEndOfTerm(Deposit deposit, decimal amount)
         {
             decimal interestRate = deposit.AnnualInterestRate / 100.00m;
             decimal finalAmount = amount;
             int period = deposit.Term;
 
-            // Adjust the interest rate based on the client type
             if (deposit.ClientType == ClientType.VIP)
             {
-                interestRate *= 1.1m; // Apply a 10% increase for VIP clients
+                interestRate *= 1.1m;
             }
 
-            // Adjust the interest rate based on the interest payment type
             if (deposit.InterestPayment == InterestPayment.Monthly)
             {
-                interestRate /= 12; // Apply monthly compounding
-                period *= 12;
+                interestRate /= 12;
             }
             else if (deposit.InterestPayment == InterestPayment.Quarterly)
             {
-                interestRate /= 4; // Apply quarterly compounding
-                period *= 3;
+                interestRate /= 4;
+                period /= 4;
+            }
+            else if (deposit.InterestPayment == InterestPayment.Yearly)
+            {
+                period /= 12;
             }
 
-            // Calculate the final amount at the end of the deposit term
-
-            for (int i = 0; i < period / 12; i++)
+            for (int i = 0; i < period; i++)
             {
                 decimal interest = finalAmount * interestRate;
                 finalAmount += interest;
-
-                // Apply overdraft facility if available
-                if (deposit.OverdraftFacility && finalAmount < deposit.MinimalAmount)
-                {
-                    finalAmount = deposit.MinimalAmount; // Set the final amount to the minimal amount
-                }
-
-                // Apply credit facility if available
-                if (deposit.CreditFacility && finalAmount > deposit.MinimalAmount)
-                {
-                    finalAmount -= deposit.MinimalAmount; // Deduct the minimal amount from the final amount
-                }
             }
 
             return finalAmount;

@@ -49,7 +49,8 @@ namespace MyMoney.Areas.Admin.Controllers
         // GET: Insurrances/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Insurrance();
+            return View(model);
         }
 
         // POST: Insurrances/Create

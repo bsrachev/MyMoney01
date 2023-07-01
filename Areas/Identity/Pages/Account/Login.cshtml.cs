@@ -28,7 +28,7 @@
         public class InputModel
         {
             [Required]
-            [Display(Name = "Username/Employee №")]
+            [Display(Name = "Username")]
             public string Username { get; set; }
 
             [Required]

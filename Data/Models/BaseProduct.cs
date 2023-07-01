@@ -10,6 +10,7 @@ namespace MyMoney.Data.Models
         public int Id { get; init; }
 
         [Required]
+        [Display(Name = "Minimal Amount")]
         public decimal MinimalAmount { get; init; }
 
         [Required]
@@ -19,6 +20,7 @@ namespace MyMoney.Data.Models
         public int Term { get; init; }
 
         [Required]
+        [Display(Name = "Annual Interest Rate")]
         public decimal AnnualInterestRate { get; init; }
     }
 }

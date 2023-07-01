@@ -10,6 +10,7 @@ namespace MyMoney.Data.Models
         public string Name { get; init; }
 
         [Required]
+        [Display(Name = "Coverage Amount")]
         public decimal CoverageAmount { get; init; }
 
         [Required]

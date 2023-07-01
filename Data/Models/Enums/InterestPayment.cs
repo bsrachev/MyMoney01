@@ -11,9 +11,6 @@
         Quarterly = 2,
 
         [Display(Name = "Yearly")]
-        Yearly = 3,
-
-        [Display(Name = "End of Term")]
-        EndOfTerm = 4
+        Yearly = 3
     }
 }

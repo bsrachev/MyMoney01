@@ -17,9 +17,11 @@
     <header class="header">
         <div class="nav-section">
             <div class="brand-and-navBtn">
-                <span class="brand-name">
-                    My Money
-                </span>
+                <a asp-controller="Home" asp-area="" asp-action="Index">
+                    <span class="brand-name" style="color: white;">
+                        My Money
+                    </span>
+                </a>
                 <span class="navBtn flex">
                     <i class="fas fa-bars"></i>
                 </span>
@@ -28,9 +30,9 @@
             <!-- navigation menu -->
             <nav class="top-nav">
                 <ul>
-                    <li><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Deposits" asp-action="Index">Депозити</a></li>
-                    <li><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Credits" asp-action="Index">Кредити</a></li>
-                    <li><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Insurrances" asp-action="Index">Застраховки</a></li>
+                    <li style="text-align: center; vertical-align: middle;"><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Deposits" asp-action="Index">Депозити</a></li>
+                    <li style="text-align: center; vertical-align: middle;"><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Credits" asp-action="Index">Кредити</a></li>
+                    <li style="text-align: center; vertical-align: middle;"><a asp-area="@(this.User.IsAdmin() ? "Admin" : "")" asp-controller="Insurrances" asp-action="Index">Застраховки</a></li>
 
                     <partial name="_LoginPartial" />
                 </ul>
@@ -56,16 +58,16 @@
             <div class="social-icons">
                 <ul>
                     <li>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"></a>
                     </li>
                 </ul>
             </div>
@@ -93,8 +95,10 @@
     <footer class="footer">
         <div class="footer-container container">
             <div>
-                <h2>MYMONEY</h2>
+                <h2>My Money</h2>
                 <p>Where understanding money is easy.</p>
+                <hr />
+                <h4><a asp-controller="Home" asp-area="" asp-action="Privacy" style="color: white;">Privacy Policy</a></h4>
             </div>
             <div>
                 <h3>Free Subscription!</h3>
@@ -107,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <p>&copy; Copyright ЕASYBANK . Everything about money</p>
+        <p>&copy; Copyright My Money. Everything about money</p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -48,7 +48,8 @@ namespace MyMoney.Areas.Admin.Controllers
         // GET: Credits/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Credit();
+            return View(model);
         }
 
         // POST: Credits/Create

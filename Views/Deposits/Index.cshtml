@@ -49,32 +49,35 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Minimal Amount
+            <th style="text-align: center; vertical-align: middle;">
+                Минимална сума
             </th>
-            <th>
-                Currency
+            <th style="text-align: center; vertical-align: middle;">
+                Валута
             </th>
-            <th>
-                Term
+            <th style="text-align: center; vertical-align: middle;">
+                Срок
             </th>
-            <th>
-                Annual InterestRate
+            <th style="text-align: center; vertical-align: middle;">
+                Годишна лихва
             </th>
-            <th>
-                Client Type
+            <th style="text-align: center; vertical-align: middle;">
+                Тип клиент
             </th>
-            <th>
-                Interest Payment
+            <th style="text-align: center; vertical-align: middle;">
+                Олихвяване
             </th>
-            <th>
-                IsInterest Fixed
+            <th style="text-align: center; vertical-align: middle;">
+                Фикирана лихва
             </th>
-            <th>
-                Overdraft Facility
+            <th style="text-align: center; vertical-align: middle;">
+                Възможност за овърдрафт
             </th>
-            <th>
-                Credit Facility
+            <th style="text-align: center; vertical-align: middle;">
+                Възможност за кредит
+            </th>
+            <th style="text-align: center; vertical-align: middle;">
+                Желана сума
             </th>
             <th></th>
         </tr>
@@ -83,36 +86,40 @@
         @foreach (var item in Model.Deposits)
         {
             <tr>
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.MinimalAmount)
                 </td>
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.Currency)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Term)
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Term) месеца
                 </td>
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.AnnualInterestRate)
                 </td>
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.ClientType)
                 </td>
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
                     @Html.DisplayFor(modelItem => item.InterestPayment)
+                <td style="text-align: center; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.IsInterestFixed)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsInterestFixed)
+                <td style="text-align: center; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.OverdraftFacility)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OverdraftFacility)
+                <td style="text-align: center; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.CreditFacility)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreditFacility)
+                <td style="text-align: center; vertical-align: middle;">
+                    <div class="input-group">
+                        <input id="desiredAmountInput" asp-for="DesiredAmount" class="form-control" />
+                    </div>
                 </td>
                 <td>
                     <div class="button-holder">
-                        <a href="/Deposits?orderId=@Model&depositId=@item.Id" class="btn btn-info">Calculate</a>
+                        <a href="/Deposits?querySearch=@Model&depositId=@item.Id&desiredAmount=@Model.DesiredAmount" class="btn btn-info">Calculate</a>
                     </div>
                 </td>
             </tr>
@@ -130,3 +137,22 @@
     </div>
 }
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var calculateButton = document.getElementById("calculateButton");
+        var desiredAmountInput = document.getElementById("desiredAmountInput");
+
+        calculateButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            var desiredAmount = desiredAmountInput.value;
+            var querySearchModel = "@Model";
+            var depositId = calculateButton.getAttribute("data-deposit-id");
+
+            var url = `/Deposits?querySearch=${querySearchModel}&depositId=${depositId}&desiredAmount=${desiredAmount}`;
+
+            @*console.log(url); *@
+            window.location.href = url;
+        });
+    });
+</script>

@@ -15,6 +15,8 @@ namespace MyMoney.Models.Deposits
 
         public int? SelectedDepositId { get; set; }
 
+        public decimal DesiredAmount { get; set; }
+
         public decimal CalculatedAmount { get; set; }
     }
 }

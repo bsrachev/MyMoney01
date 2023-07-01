@@ -11,54 +11,61 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" class="needs-validation" novalidate>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="MinimalAmount" class="control-label"></label>
-                <input asp-for="MinimalAmount" class="form-control" />
+                <input asp-for="MinimalAmount" class="form-control" required />
                 <span asp-validation-for="MinimalAmount" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Currency" class="control-label"></label>
-                <select asp-for="Currency" class="form-control"></select>
+                <select asp-for="Currency" class="form-control" required></select>
                 <span asp-validation-for="Currency" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Term" class="control-label"></label>
-                <input asp-for="Term" class="form-control" />
+                <input asp-for="Term" class="form-control" required />
                 <span asp-validation-for="Term" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="AnnualInterestRate" class="control-label"></label>
-                <input asp-for="AnnualInterestRate" class="form-control" />
+                <input asp-for="AnnualInterestRate" class="form-control" required />
                 <span asp-validation-for="AnnualInterestRate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ClientType" class="control-label"></label>
-                <select asp-for="ClientType" class="form-control"></select>
+                <select asp-for="ClientType" class="form-control" required></select>
                 <span asp-validation-for="ClientType" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="InterestPayment" class="control-label"></label>
-                <select asp-for="InterestPayment" class="form-control"></select>
+                <select asp-for="InterestPayment" class="form-control" required></select>
                 <span asp-validation-for="InterestPayment" class="text-danger"></span>
             </div>
+
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsInterestFixed" /> @Html.DisplayNameFor(model => model.IsInterestFixed)
-                </label>
+                <input class="form-check-input" asp-for="IsInterestFixed" />
+                <label class="form-check-label" asp-for="IsInterestFixed"></label>
             </div>
+
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="OverdraftFacility" /> @Html.DisplayNameFor(model => model.OverdraftFacility)
-                </label>
+                <input class="form-check-input" asp-for="OverdraftFacility" />
+                <label class="form-check-label" asp-for="OverdraftFacility"></label>
             </div>
+
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CreditFacility" /> @Html.DisplayNameFor(model => model.CreditFacility)
-                </label>
+                <input class="form-check-input" asp-for="CreditFacility" />
+                <label class="form-check-label" asp-for="CreditFacility"></label>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -67,6 +74,26 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
+@section Scripts {
+    <script>
+        // Disable form submission if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

@@ -9,6 +9,7 @@
     {
         [Required]
         [MaxLength(FullNameMaxLength)]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
     }
 }

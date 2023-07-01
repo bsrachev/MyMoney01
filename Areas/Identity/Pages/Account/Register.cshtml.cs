@@ -36,7 +36,6 @@
         {
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
-            //[RegularExpression(@"(BO\d{3})", ErrorMessage = "Employee number must be in the format BO000.")]
             public string PhoneNumber { get; set; }
 
             [Required]
